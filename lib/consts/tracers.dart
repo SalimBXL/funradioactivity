@@ -1,0 +1,12 @@
+//
+// TRACERS
+//
+enum TRACERS { F18, MET }
+const TRACERS_NAME = const {
+  TRACERS.F18: "FDG",
+  TRACERS.MET: "MET",
+};
+const TRACERS_HALFLIFE = const {
+  TRACERS.F18: 110,
+  TRACERS.MET: 110,
+};
