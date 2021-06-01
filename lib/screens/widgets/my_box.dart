@@ -11,11 +11,20 @@ class MyBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(16),
+      color: COLOR_SECONDARY_B,
+      margin: EdgeInsets.all(BOX_PADDING),
       elevation: ELEVATION2,
       child: ListTile(
-        leading: Icon(icon),
-        title: Text(title),
+        leading: Icon(
+          icon,
+          color: COLOR_SECONDARY_F,
+        ),
+        title: Text(
+          title,
+          style: TextStyle(
+            color: COLOR_SECONDARY_F,
+          ),
+        ),
         subtitle: input,
       ),
     );

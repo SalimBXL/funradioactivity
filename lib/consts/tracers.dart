@@ -10,3 +10,13 @@ const TRACERS_HALFLIFE = const {
   TRACERS.F18: 110,
   TRACERS.MET: 110,
 };
+
+//
+// UNITS
+//
+enum UNITS { Bq, MBq, GBq }
+const UNITS_NAME = const {
+  UNITS.Bq: "Bq",
+  UNITS.MBq: "MBq",
+  UNITS.GBq: "GBq",
+};

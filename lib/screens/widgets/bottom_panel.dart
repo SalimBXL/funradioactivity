@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:funradioactivity/consts/style.dart';
-import 'package:funradioactivity/consts/tracers.dart';
-import 'package:funradioactivity/screens/widgets/my_box.dart';
 import 'package:funradioactivity/screens/widgets/sticker.dart';
 
 class BottomPanel extends StatelessWidget {

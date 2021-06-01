@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:funradioactivity/consts/style.dart';
+import 'package:funradioactivity/consts/texts.dart';
 import 'package:funradioactivity/screens/widgets/my_box.dart';
 
 class MeasureActivityBox extends StatelessWidget {
@@ -11,7 +12,7 @@ class MeasureActivityBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return MyBox(
       icon: ICON_ACTIVITY,
-      title: "Activité mesurée (MBq)",
+      title: BOX_ACTIVITY_TITLE,
       input: TextField(
         onChanged: (value) {
           actionCallback(value);
@@ -22,7 +23,7 @@ class MeasureActivityBox extends StatelessWidget {
         expands: false,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
-          hintText: 'MBq',
+          hintText: '',
         ),
       ),
     );

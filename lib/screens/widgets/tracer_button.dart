@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:funradioactivity/consts/tracers.dart';
-import 'package:funradioactivity/screens/widgets/my_box.dart';
 
 class TracerButton extends StatelessWidget {
   final TRACERS tracerName;

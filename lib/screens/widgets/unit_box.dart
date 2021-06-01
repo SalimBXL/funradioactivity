@@ -3,29 +3,29 @@ import 'package:funradioactivity/consts/style.dart';
 import 'package:funradioactivity/consts/texts.dart';
 import 'package:funradioactivity/consts/tracers.dart';
 import 'package:funradioactivity/screens/widgets/my_box.dart';
-import 'package:funradioactivity/screens/widgets/tracer_button.dart';
+import 'package:funradioactivity/screens/widgets/unit_button.dart';
 
-class TracerBox extends StatelessWidget {
+class UnitBox extends StatelessWidget {
   final Function actionCallback;
 
-  TracerBox({this.actionCallback});
+  UnitBox({this.actionCallback});
 
   @override
   Widget build(BuildContext context) {
-    List<TracerButton> _tracers = [];
-    TRACERS.values.forEach((value) {
-      _tracers.add(TracerButton(
-        tracerName: value,
-        tracerCallBack: actionCallback,
+    List<UnitButton> _units = [];
+    UNITS.values.forEach((value) {
+      _units.add(UnitButton(
+        unitName: value,
+        unitCallBack: actionCallback,
       ));
     });
 
     return MyBox(
-      icon: ICON_TRACER,
-      title: BOX_TRACER_TITLE,
+      icon: ICON_ACTIVITY,
+      title: BOX_UNIT_TITLE,
       input: Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: _tracers,
+        children: _units,
       ),
     );
   }
