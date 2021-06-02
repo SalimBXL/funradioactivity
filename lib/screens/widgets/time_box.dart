@@ -2,12 +2,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:funradioactivity/consts/style.dart';
 import 'package:funradioactivity/consts/texts.dart';
+import 'package:funradioactivity/consts/tracers.dart';
+import 'package:funradioactivity/screens/widgets/go_compute.dart';
 import 'package:funradioactivity/screens/widgets/my_box.dart';
 
 class MeasureTimeBox extends StatelessWidget {
   final Function actionCallback;
+  final TimeOfDay measureTimeValue;
+  final TRACERS measureTracerValue;
+  final UNITS unitValue;
+  final double measureActivityValue;
 
-  MeasureTimeBox({this.actionCallback});
+  MeasureTimeBox({
+    @required this.actionCallback,
+    @required this.measureTimeValue,
+    @required this.measureTracerValue,
+    @required this.unitValue,
+    @required this.measureActivityValue,
+  });
 
   Future<Null> selectTime(BuildContext context) async {
     TimeOfDay _time = TimeOfDay.now();
@@ -34,7 +46,7 @@ class MeasureTimeBox extends StatelessWidget {
       icon: ICON_TIME,
       title: BOX_TIME_TITLE,
       input: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           OutlinedButton(
             onPressed: () {
@@ -42,6 +54,11 @@ class MeasureTimeBox extends StatelessWidget {
             },
             child: Text(BOX_TIME_BUTTON),
           ),
+          GoCompute(
+              measureTimeValue: measureTimeValue,
+              measureTracerValue: measureTracerValue,
+              unitValue: unitValue,
+              measureActivityValue: measureActivityValue),
         ],
       ),
     );

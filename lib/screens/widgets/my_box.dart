@@ -19,13 +19,14 @@ class MyBox extends StatelessWidget {
           icon,
           color: COLOR_SECONDARY_F,
         ),
-        title: Text(
-          title,
-          style: TextStyle(
-            color: COLOR_SECONDARY_F,
-          ),
-        ),
-        subtitle: input,
+        title: input,
+        // Text(
+        //   title,
+        //   style: TextStyle(
+        //     color: COLOR_SECONDARY_F,
+        //   ),
+        // ),
+        //subtitle: input,
       ),
     );
   }

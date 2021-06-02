@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:funradioactivity/consts/style.dart';
+import 'package:funradioactivity/consts/tracers.dart';
 import 'package:funradioactivity/models/dose.dart';
-import 'package:funradioactivity/screens/widgets/ComputedActivity.dart';
-import 'package:funradioactivity/screens/widgets/ElapsedTime.dart';
 import 'package:funradioactivity/screens/widgets/UpperBar.dart';
 import 'package:funradioactivity/screens/widgets/appbar.dart';
+import 'package:funradioactivity/screens/widgets/computed_activity_card.dart';
 
 class Counter extends StatefulWidget {
   Counter({@required this.dose});
@@ -15,6 +15,26 @@ class Counter extends StatefulWidget {
 }
 
 class _Counter extends State<Counter> {
+  String _elapsedTime;
+  String _computedActivity;
+  String _unit;
+  double _progress;
+
+  void updateValues() {
+    setState(() {
+      _elapsedTime = widget.dose.elapsedTime;
+      _computedActivity = widget.dose.computedActivity.toString();
+      _unit = UNITS_NAME[widget.dose.unit];
+      _progress = (widget.dose.computedActivity / widget.dose.activity);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    updateValues();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +44,9 @@ class _Counter extends State<Counter> {
         backgroundColor: COLOR_PRIMARY_B,
         foregroundColor: COLOR_PRIMARY_F,
         child: Icon(Icons.refresh),
-        onPressed: () {},
+        onPressed: () {
+          updateValues();
+        },
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
@@ -36,27 +58,17 @@ class _Counter extends State<Counter> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: ICON_BIG_SIZE / 2, bottom: ICON_BIG_SIZE / 2),
-                  child: Icon(
-                    Icons.play_circle_outline_outlined,
-                    size: ICON_BIG_SIZE,
-                    color: COLOR_FOREGROUND,
-                  ),
+                Image(
+                  //width: 200.0,
+                  height: 200.0,
+                  image: AssetImage('assets/images/radiation.jpg'),
                 ),
-                Card(
-                  color: COLOR_SECONDARY_B,
-                  elevation: ELEVATION1,
-                  child: Padding(
-                    padding: const EdgeInsets.all(BOX_PADDING),
-                    child: Column(
-                      children: [
-                        ElapsedTime(widget: widget),
-                        ComputedActivity(widget: widget),
-                      ],
-                    ),
-                  ),
+                ComputedActivityCard(
+                  progress: _progress,
+                  elapsedTime: _elapsedTime,
+                  widget: widget,
+                  computedActivity: _computedActivity,
+                  unit: _unit,
                 ),
               ],
             ),

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:funradioactivity/consts/tracers.dart';
 
@@ -48,7 +50,7 @@ class Dose {
       "${(this._time.minute < 10) ? "0" : ""}"
       "${this._time.minute}";
 
-  String get elapsedTime {
+  Duration _elapsedTime() {
     DateTime _now = DateTime.now();
     DateTime _time = DateTime(
       _now.year,
@@ -57,12 +59,46 @@ class Dose {
       this._time.hour,
       this._time.minute,
     );
-    Duration diff = _now.difference(_time);
+    return _now.difference(_time);
+  }
+
+  String get elapsedTime {
+    Duration diff = this._elapsedTime();
     int _h = (diff.inHours).truncate();
     int _m = (diff.inMinutes - (_h * 60)).truncate();
     int _s = (diff.inSeconds - (_h * 60 * 60) - (_m * 60)).truncate();
-    return "${(_h < 10) ? 0 : ''}$_h "
-        ": ${(_m < 10) ? 0 : ''}$_m "
-        ": ${(_s < 10) ? 0 : ''}$_s";
+    return "${(_h < 10) ? 0 : ''}$_h"
+        ":${(_m < 10) ? 0 : ''}$_m"
+        ":${(_s < 10) ? 0 : ''}$_s";
+  }
+
+  double get computedActivity {
+    double _result;
+    double _at = computedActivityInBq;
+    if (this._unit == UNITS.Bq) _result = _at;
+    if (this._unit == UNITS.MBq) _result = this._convertBqToMBq(_at);
+    if (this._unit == UNITS.GBq) _result = this._convertBqToGBq(_at);
+    return _result;
+  }
+
+  double get computedActivityInBq {
+    int _elapsedTimeInMinutes = this._elapsedTime().inMinutes;
+    double _tracerHalfTimeInMinutes = TRACERS_HALFLIFE[this._tracer];
+    double _halfLifeTimes = (_elapsedTimeInMinutes / _tracerHalfTimeInMinutes);
+    double _a0 = this._activity;
+
+    double _at =
+        (_a0 * pow(EULER, (-DECAY_CONST * _halfLifeTimes))).roundToDouble();
+
+    return _at;
+  }
+
+  double computedActivityInUnit(UNITS unitToConvert) {
+    double _result;
+    double _at = this.computedActivity;
+    if (unitToConvert == UNITS.Bq) _result = _at;
+    if (unitToConvert == UNITS.MBq) _result = this._convertBqToMBq(_at);
+    if (unitToConvert == UNITS.GBq) _result = this._convertBqToGBq(_at);
+    return _result;
   }
 }

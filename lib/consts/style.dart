@@ -11,6 +11,7 @@ const COLOR_FOREGROUND = Colors.black87;
 
 const FONT_BIG = 24.0;
 const FONT_MEDIUM = 20.0;
+const FONT_SMALL = 14.0;
 
 const BOX_PADDING = 8.0;
 
