@@ -13,7 +13,12 @@ class TracerButton extends StatelessWidget {
       onPressed: () {
         tracerCallBack(tracerName);
       },
-      child: Text(TRACERS_NAME[tracerName]),
+      child: Text(
+        TRACERS_NAME[tracerName],
+        softWrap: false,
+        textAlign: TextAlign.center,
+        style: TextStyle(),
+      ),
     );
   }
 }

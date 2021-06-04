@@ -20,19 +20,17 @@ class TracerBox extends StatelessWidget {
       ));
     });
 
-    return MyBox(
-      icon: ICON_TRACER,
-      title: BOX_TRACER_TITLE,
-      input: GridView.count(
-        shrinkWrap: true,
-        crossAxisCount: 3,
-        children: _tracers,
+    return Flexible(
+      fit: FlexFit.loose,
+      child: MyBox(
+        icon: ICON_TRACER,
+        title: BOX_TRACER_TITLE,
+        input: GridView.count(
+          shrinkWrap: true,
+          crossAxisCount: 4,
+          children: _tracers,
+        ),
       ),
-
-      // input: Row(
-      //   mainAxisAlignment: MainAxisAlignment.start,
-      //   children: _tracers,
-      // ),
     );
   }
 }

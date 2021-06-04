@@ -9,7 +9,7 @@ const COLOR_SECONDARY_F = Colors.indigo;
 const COLOR_BACKGROUND = Colors.amber;
 const COLOR_FOREGROUND = Colors.black87;
 
-const FONT_BIG = 24.0;
+const FONT_BIG = 28.0;
 const FONT_MEDIUM = 20.0;
 const FONT_SMALL = 14.0;
 

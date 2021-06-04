@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:funradioactivity/consts/style.dart';
 import 'package:funradioactivity/consts/tracers.dart';
@@ -19,11 +21,13 @@ class _Counter extends State<Counter> {
   String _computedActivity;
   String _unit;
   double _progress;
+  Timer _timer;
 
   void updateValues() {
     setState(() {
       _elapsedTime = widget.dose.elapsedTime;
-      _computedActivity = widget.dose.computedActivity.toString();
+      _computedActivity =
+          widget.dose.computedActivity.toStringAsFixed(DIGITS_AFTER);
       _unit = UNITS_NAME[widget.dose.unit];
       _progress = (widget.dose.computedActivity / widget.dose.activity);
     });
@@ -33,6 +37,19 @@ class _Counter extends State<Counter> {
   void initState() {
     super.initState();
     updateValues();
+    _runTimer();
+  }
+
+  void _runTimer() {
+    _timer = Timer.periodic(Duration(minutes: 1), (timer) {
+      updateValues();
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer.cancel();
   }
 
   @override

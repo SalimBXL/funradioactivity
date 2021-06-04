@@ -58,7 +58,7 @@ class SmallTextActivity extends StatelessWidget {
     UNITS.values.forEach((unit) {
       if (widget.dose.unit != unit) {
         activities.add(Text(
-          "${widget.dose.computedActivityInUnit(unit).toStringAsFixed(12)} ${UNITS_NAME[unit]}",
+          "${widget.dose.computedActivityInUnit(unit).toStringAsFixed(DIGITS_AFTER)} ${UNITS_NAME[unit]}",
           style: TextStyle(
             fontSize: FONT_SMALL,
             fontWeight: FontWeight.bold,

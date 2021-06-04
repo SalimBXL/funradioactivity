@@ -57,11 +57,19 @@ class _FormPage extends State<FormPage> {
     return Scaffold(
       backgroundColor: COLOR_BACKGROUND,
       appBar: appBar(),
+      bottomNavigationBar: BottomPanel(
+        tracer: TRACERS_NAME[measureTracerValue],
+        activity: "${measureActivityValue.toString()} ${UNITS_NAME[unitValue]}",
+        time: "${(measureTimeValue.hour < 10) ? "0" : ""}"
+            "${measureTimeValue.hour}:"
+            "${(measureTimeValue.minute < 10) ? "0" : ""}"
+            "${measureTimeValue.minute}",
+      ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Expanded(child: TracerBox(actionCallback: setTracerValue)),
+          TracerBox(actionCallback: setTracerValue),
           UnitBox(actionCallback: setUnitValue),
           MeasureActivityBox(actionCallback: setActivityValue),
           MeasureTimeBox(
@@ -70,15 +78,6 @@ class _FormPage extends State<FormPage> {
             measureTimeValue: measureTimeValue,
             measureTracerValue: measureTracerValue,
             unitValue: unitValue,
-          ),
-          BottomPanel(
-            tracer: TRACERS_NAME[measureTracerValue],
-            activity:
-                "${measureActivityValue.toString()} ${UNITS_NAME[unitValue]}",
-            time: "${(measureTimeValue.hour < 10) ? "0" : ""}"
-                "${measureTimeValue.hour}:"
-                "${(measureTimeValue.minute < 10) ? "0" : ""}"
-                "${measureTimeValue.minute}",
           ),
         ],
       ),
