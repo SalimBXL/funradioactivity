@@ -54,22 +54,36 @@ class SmallTextActivity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Text> activities = [];
+    List<Widget> activities = [];
     UNITS.values.forEach((unit) {
       if (widget.dose.unit != unit) {
-        activities.add(Text(
-          "${widget.dose.computedActivityInUnit(unit).toStringAsFixed(DIGITS_AFTER)} ${UNITS_NAME[unit]}",
-          style: TextStyle(
-            fontSize: FONT_SMALL,
-            fontWeight: FontWeight.bold,
-            color: COLOR_SECONDARY_F,
-          ),
+        activities.add(Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Text(
+              "${widget.dose.computedActivityInUnit(unit).toStringAsFixed(DIGITS_AFTER)}",
+              style: TextStyle(
+                fontSize: FONT_SMALL,
+                fontWeight: FontWeight.bold,
+                color: COLOR_SECONDARY_F,
+              ),
+            ),
+            Text(
+              "${UNITS_NAME[unit]}",
+              style: TextStyle(
+                fontSize: FONT_SMALL,
+                fontWeight: FontWeight.bold,
+                color: COLOR_SECONDARY_F,
+              ),
+            ),
+          ],
         ));
       }
     });
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: activities,
     );
   }

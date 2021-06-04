@@ -1,3 +1,4 @@
+const APP_TITLE = "Fun Radioactovity";
 const BOX_TRACER_TITLE = "Radio";
 const BOX_UNIT_TITLE = "Unit";
 const BOX_ACTIVITY_TITLE = "Activity";

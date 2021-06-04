@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:funradioactivity/screens/form_page.dart';
+import 'package:funradioactivity/consts/texts.dart';
+import 'package:funradioactivity/screens/home_page.dart';
 import 'consts/style.dart';
 
 void main() {
@@ -10,11 +11,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: APP_TITLE,
       theme: ThemeData(
         primarySwatch: COLOR_PRIMARY_B,
       ),
-      home: FormPage(),
+      home: HomePage(),
     );
   }
 }

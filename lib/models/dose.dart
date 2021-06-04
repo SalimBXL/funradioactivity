@@ -95,7 +95,7 @@ class Dose {
 
   double computedActivityInUnit(UNITS unitToConvert) {
     double _result;
-    double _at = this.computedActivity;
+    double _at = this.computedActivityInBq;
     if (unitToConvert == UNITS.Bq) _result = _at;
     if (unitToConvert == UNITS.MBq) _result = this._convertBqToMBq(_at);
     if (unitToConvert == UNITS.GBq) _result = this._convertBqToGBq(_at);
