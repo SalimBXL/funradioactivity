@@ -7,8 +7,8 @@ import 'package:funradioactivity/screens/widgets/tracer_button.dart';
 
 class TracerBox extends StatelessWidget {
   final Function actionCallback;
-
-  TracerBox({this.actionCallback});
+  final TRACERS tracer;
+  TracerBox({this.actionCallback, this.tracer});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +16,7 @@ class TracerBox extends StatelessWidget {
     TRACERS.values.forEach((value) {
       _tracers.add(TracerButton(
         tracerName: value,
+        selected: (tracer == value),
         tracerCallBack: actionCallback,
       ));
     });

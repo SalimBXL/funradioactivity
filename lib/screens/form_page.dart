@@ -4,6 +4,7 @@ import 'package:funradioactivity/consts/tracers.dart';
 import 'package:funradioactivity/screens/widgets/activity_box.dart';
 import 'package:funradioactivity/screens/widgets/appbar.dart';
 import 'package:funradioactivity/screens/widgets/bottom_panel.dart';
+import 'package:funradioactivity/screens/widgets/go_compute.dart';
 import 'package:funradioactivity/screens/widgets/time_box.dart';
 import 'package:funradioactivity/screens/widgets/tracer_box.dart';
 import 'package:funradioactivity/screens/widgets/unit_box.dart';
@@ -69,8 +70,8 @@ class _FormPage extends State<FormPage> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          TracerBox(actionCallback: setTracerValue),
-          UnitBox(actionCallback: setUnitValue),
+          TracerBox(actionCallback: setTracerValue, tracer: measureTracerValue),
+          UnitBox(actionCallback: setUnitValue, unit: unitValue),
           MeasureActivityBox(actionCallback: setActivityValue),
           MeasureTimeBox(
             actionCallback: setTimeValue,
@@ -79,6 +80,11 @@ class _FormPage extends State<FormPage> {
             measureTracerValue: measureTracerValue,
             unitValue: unitValue,
           ),
+          GoCompute(
+              measureTimeValue: measureTimeValue,
+              measureTracerValue: measureTracerValue,
+              unitValue: unitValue,
+              measureActivityValue: measureActivityValue),
         ],
       ),
     );

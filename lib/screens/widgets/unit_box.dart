@@ -7,8 +7,8 @@ import 'package:funradioactivity/screens/widgets/unit_button.dart';
 
 class UnitBox extends StatelessWidget {
   final Function actionCallback;
-
-  UnitBox({this.actionCallback});
+  final UNITS unit;
+  UnitBox({this.actionCallback, this.unit});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +16,7 @@ class UnitBox extends StatelessWidget {
     UNITS.values.forEach((value) {
       _units.add(UnitButton(
         unitName: value,
+        selected: (unit == value),
         unitCallBack: actionCallback,
       ));
     });

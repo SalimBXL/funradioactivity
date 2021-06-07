@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:funradioactivity/consts/style.dart';
 import 'package:funradioactivity/consts/texts.dart';
 import 'package:funradioactivity/consts/tracers.dart';
-import 'package:funradioactivity/screens/widgets/go_compute.dart';
 import 'package:funradioactivity/screens/widgets/my_box.dart';
 
 class MeasureTimeBox extends StatelessWidget {
@@ -54,11 +53,6 @@ class MeasureTimeBox extends StatelessWidget {
             },
             child: Text(BOX_TIME_BUTTON),
           ),
-          GoCompute(
-              measureTimeValue: measureTimeValue,
-              measureTracerValue: measureTracerValue,
-              unitValue: unitValue,
-              measureActivityValue: measureActivityValue),
         ],
       ),
     );

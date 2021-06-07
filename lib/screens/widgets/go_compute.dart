@@ -21,39 +21,42 @@ class GoCompute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      elevation: ELEVATION2,
-      color: COLOR_PRIMARY_B,
-      child: Icon(
-        Icons.play_circle_outline_outlined,
-        color: COLOR_PRIMARY_F,
-      ),
-      onPressed: () {
-        if (!(measureTimeValue != null &&
-            measureTracerValue != null &&
-            unitValue != null &&
-            measureActivityValue > 0)) {
-          final snackBar = SnackBar(
-            content: Text(
-              ERROR_MESSAGE_NOT_READY,
-            ),
+    return Flexible(
+      fit: FlexFit.loose,
+      child: ElevatedButton(
+        //elevation: ELEVATION2,
+        //color: COLOR_PRIMARY_B,
+        child: Icon(
+          Icons.play_circle_outline_outlined,
+          color: COLOR_PRIMARY_F,
+        ),
+        onPressed: () {
+          if (!(measureTimeValue != null &&
+              measureTracerValue != null &&
+              unitValue != null &&
+              measureActivityValue > 0)) {
+            final snackBar = SnackBar(
+              content: Text(
+                ERROR_MESSAGE_NOT_READY,
+              ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            return;
+          }
+          Dose _myDose = Dose(
+              unit: unitValue,
+              activity: measureActivityValue,
+              tracer: measureTracerValue,
+              time: measureTimeValue);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Counter(
+                      dose: _myDose,
+                    )),
           );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          return;
-        }
-        Dose _myDose = Dose(
-            unit: unitValue,
-            activity: measureActivityValue,
-            tracer: measureTracerValue,
-            time: measureTimeValue);
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => Counter(
-                    dose: _myDose,
-                  )),
-        );
-      },
+        },
+      ),
     );
   }
 }

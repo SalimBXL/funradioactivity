@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:funradioactivity/consts/style.dart';
 import 'package:funradioactivity/consts/tracers.dart';
 import 'package:funradioactivity/models/dose.dart';
@@ -67,28 +68,20 @@ class _Counter extends State<Counter> {
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           UpperBar(widget: widget),
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Image(
-                  //width: 200.0,
-                  height: 200.0,
-                  image: AssetImage('assets/images/radiation.jpg'),
-                ),
-                ComputedActivityCard(
-                  progress: _progress,
-                  elapsedTime: _elapsedTime,
-                  widget: widget,
-                  computedActivity: _computedActivity,
-                  unit: _unit,
-                ),
-              ],
-            ),
+          Image(
+            //width: 200.0,
+            height: 200.0,
+            image: AssetImage('assets/images/radiation.jpg'),
+          ),
+          ComputedActivityCard(
+            progress: _progress,
+            elapsedTime: _elapsedTime,
+            widget: widget,
+            computedActivity: _computedActivity,
+            unit: _unit,
           ),
         ],
       ),
