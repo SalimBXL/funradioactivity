@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:funradioactivity/consts/style.dart';
 import 'package:funradioactivity/screens/form_page.dart';
+import 'package:funradioactivity/screens/from_server_page.dart';
 import 'package:funradioactivity/screens/widgets/appbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,13 +24,19 @@ class _Counter extends State<HomePage> {
               icon: ICON_CONNECT,
               label: "Get from Server",
               page: () {
-                final snackBar = SnackBar(
-                  content: Text(
-                    "Server not yet implemented. try ti fill the fields manually.",
+                // final snackBar = SnackBar(
+                //   content: Text(
+                //     "Server not yet implemented. try ti fill the fields manually.",
+                //   ),
+                // );
+                // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                // return;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FromServerPage(),
                   ),
                 );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                return;
               },
             ),
             HomePageButton(

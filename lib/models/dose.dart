@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:funradioactivity/consts/tracers.dart';
 
@@ -100,5 +100,42 @@ class Dose {
     if (unitToConvert == UNITS.MBq) _result = this._convertBqToMBq(_at);
     if (unitToConvert == UNITS.GBq) _result = this._convertBqToGBq(_at);
     return _result;
+  }
+
+  factory Dose.fromJson(Map<String, dynamic> json) {
+    // TRACER
+    TRACERS _tracer;
+    TRACERS.values.forEach((element) {
+      String e = describeEnum(element).toUpperCase();
+      String j = json['tracer'].toString().toUpperCase();
+      bool eq = (e == j);
+      if (eq) _tracer = element;
+    });
+
+    // TIME
+    TimeOfDay _time;
+    String t = json['time'].toString().split(" ").last;
+    _time = TimeOfDay(
+        hour: int.parse(t.split(":").first),
+        minute: int.parse(t.split(":").last));
+
+    // ACTIVITY & UNIT
+    double _activity =
+        double.parse(json['calibration'].toString().split(" ").first);
+    UNITS _unit;
+    String _u = json['calibration'].toString().split(" ").last;
+    UNITS.values.forEach((element) {
+      String e = describeEnum(element).toUpperCase();
+      String j = _u.toUpperCase();
+      bool eq = (e == j);
+      if (eq) _unit = element;
+    });
+
+    return Dose(
+      tracer: _tracer,
+      time: _time,
+      activity: _activity,
+      unit: _unit,
+    );
   }
 }
