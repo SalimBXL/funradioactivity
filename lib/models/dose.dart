@@ -8,18 +8,21 @@ class Dose {
       {@required TimeOfDay time,
       @required double activity,
       @required UNITS unit,
-      @required TRACERS tracer}) {
+      @required TRACERS tracer,
+      String reference = ""}) {
     this._time = time;
     this._tracer = tracer;
     this._activity = activity;
     this._unit = unit;
     if (this._unit != UNITS.Bq) this._convertActivityToBq();
+    this._reference = reference;
   }
 
   TRACERS _tracer;
   double _activity; // in Bq...
   UNITS _unit;
   TimeOfDay _time;
+  String _reference;
 
   void _convertActivityToBq() {
     if (this._unit == UNITS.MBq) {
@@ -102,6 +105,8 @@ class Dose {
     return _result;
   }
 
+  String get reference => this._reference;
+
   factory Dose.fromJson(Map<String, dynamic> json) {
     // TRACER
     TRACERS _tracer;
@@ -131,11 +136,15 @@ class Dose {
       if (eq) _unit = element;
     });
 
+    // REFERENCE
+    String _reference = json['ref'];
+
     return Dose(
       tracer: _tracer,
       time: _time,
       activity: _activity,
       unit: _unit,
+      reference: _reference,
     );
   }
 }

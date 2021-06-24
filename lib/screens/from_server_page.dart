@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:funradioactivity/consts/style.dart';
 import 'package:funradioactivity/consts/tracers.dart';
 import 'package:funradioactivity/models/dose.dart';
+import 'package:funradioactivity/screens/counter.dart';
 import 'package:funradioactivity/screens/widgets/activity_box.dart';
 import 'package:funradioactivity/screens/widgets/appbar.dart';
 import 'package:funradioactivity/screens/widgets/bottom_panel.dart';
@@ -23,59 +24,68 @@ class _FormPage extends State<FromServerPage> {
   UNITS unitValue;
   double measureActivityValue;
   TimeOfDay measureTimeValue;
+  String reference;
+  Dose _myDose;
 
   Future<Dose> futureDose;
 
   @override
   void initState() {
     super.initState();
+    reference = "";
     measureActivityValue = 0.0;
     measureTimeValue = TimeOfDay.now();
     measureTracerValue = TRACERS.values[0];
     unitValue = UNITS.values[0];
     futureDose = fetchDose();
-    futureDose
-        .onError((error, stackTrace) {
-          final snackBar = SnackBar(
-            content: Text(
-              "Error! $error",
-            ),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          return;
-        })
-        .whenComplete(() => {
-              // final snackBar = SnackBar(
-              //   content: Text(
-              //     "Values updated.",
-              //   ),
-              // );
-              // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              // return;
-            })
-        .then((value) {
-          setState(() {
-            measureActivityValue = value.activity;
-            measureTimeValue = value.time;
-            measureTracerValue = value.tracer;
-            unitValue = value.unit;
-          });
-          final snackBar = SnackBar(
-            content: Text(
-              "Values updated.",
-            ),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          //return;
-        });
+    futureDose.onError((error, stackTrace) {
+      final snackBar = SnackBar(
+        content: Text(
+          "Error! $error",
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      return;
+    }).then((value) {
+      setState(() {
+        measureActivityValue = value.activity;
+        measureTimeValue = value.time;
+        measureTracerValue = value.tracer;
+        unitValue = value.unit;
+        reference = value.reference;
+      });
+      final snackBar = SnackBar(
+        content: Text(
+          "Values updated.",
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      //return;
+      _myDose = Dose(
+        unit: unitValue,
+        activity: measureActivityValue,
+        tracer: measureTracerValue,
+        time: measureTimeValue,
+        reference: reference,
+      );
+    }).whenComplete(() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Counter(
+                  dose: _myDose,
+                )),
+      );
+    });
   }
 
   Future<Dose> fetchDose() async {
-    String url = "http://164.15.145.192:3000/210623FDG174.json";
+    String url = "http://164.15.145.192:3000/test_bordetc.json";
     final response = await http.get(Uri.parse(url));
 
     print("************");
     print("************");
+    print("===== URL : $url =====");
     print("STATUS : ${response.statusCode}");
     print(response.body);
     print("************");

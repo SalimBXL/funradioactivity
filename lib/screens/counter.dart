@@ -76,6 +76,14 @@ class _Counter extends State<Counter> {
             height: 200.0,
             image: AssetImage('assets/images/radiation.jpg'),
           ),
+          Padding(
+            padding: const EdgeInsets.all(BOX_PADDING),
+            child: Text((widget.dose.reference == null)
+                ? ""
+                : (widget.dose.reference.isEmpty)
+                    ? ""
+                    : "Ref: ${widget.dose.reference}"),
+          ),
           ComputedActivityCard(
             progress: _progress,
             elapsedTime: _elapsedTime,
